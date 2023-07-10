@@ -15,7 +15,7 @@ const hatSchema = new Schema({
   price: Number,
 });
 
-const Hat = mongoose.model("Hat", hatSchema, "sneakers");
+const Hat = mongoose.model("Hat", hatSchema, "Sneakers");
 
 fs.readFile("./data/Sneakers.json", "utf8", async (err, data) => {
   if (err) {
@@ -31,7 +31,7 @@ fs.readFile("./data/Sneakers.json", "utf8", async (err, data) => {
       const doc = await hat.save();
       console.log("data saved");
     } catch (err) {
-      cosole.log(err);
+      console.log(err);
     }
   }
 });
