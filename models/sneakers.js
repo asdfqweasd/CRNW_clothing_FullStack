@@ -8,21 +8,23 @@ const sneakersSchema = new mongoose.Schema({
 });
 
 sneakersSchema.statics.getByQuery = async (query) => {
-  const sneakers = await Hat.find(query, "id name imageUrl price -_id");
+  const sneakers = await Sneaker.find(query, "id name imageUrl price -_id");
   return sneakers;
 };
 
 sneakersSchema.statics.getFullDocByQuery = async (query) => {
-  const sneakers = await Hat.find(query);
+  const sneakers = await Sneaker.find(query);
   return sneakers;
 };
 
 sneakersSchema.statics.getById = async (id) => {
+  console.log("getById called with id:", id);
   const sneaker = await Sneaker.findOne({ id: id });
   if (!sneaker) {
-    throw new Error("No found with id");
+    console.log("No sneaker found with id:", id);
+    throw new Error("No sneaker found with id");
   }
-  return hat;
+  return sneaker;
 };
 
 const Sneaker = mongoose.model("Sneaker", sneakersSchema, "sneakers");

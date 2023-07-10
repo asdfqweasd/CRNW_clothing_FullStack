@@ -8,25 +8,25 @@ const jacketsSchema = new mongoose.Schema({
 });
 
 jacketsSchema.statics.getByQuery = async (query) => {
-  const jackets = await Jackets.find(query, "id name imageUrl price -_id");
+  const jackets = await Jacket.find(query, "id name imageUrl price -_id");
   return jackets;
 };
 
 jacketsSchema.statics.getFullDocByQuery = async (query) => {
-  const jackets = await Jackets.find(query);
+  const jackets = await Jacket.find(query);
   return jackets;
 };
 
 jacketsSchema.statics.getById = async (id) => {
   console.log("getById called with id:", id);
-  const jacket = await Jackets.findOne({ id: id });
-  if (!jacket) {
-    console.log("No Jackets found with id:", id);
-    throw new Error("No Jackets found with id");
+  const jackets = await Jacket.findOne({ id: id });
+  if (!jackets) {
+    console.log("No jackets found with id:", id);
+    throw new Error("No jackets found with id");
   }
-  return jacket;
+  return jackets;
 };
 
-const Jackets = mongoose.model("Jackets", jacketsSchema, "jackets");
+const Jacket = mongoose.model("Jacket", jacketsSchema, "jackets");
 
-module.exports = Jackets;
+module.exports = Jacket;

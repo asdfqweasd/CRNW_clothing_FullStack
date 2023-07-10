@@ -8,25 +8,25 @@ const mensSchema = new mongoose.Schema({
 });
 
 mensSchema.statics.getByQuery = async (query) => {
-  const mens = await Mens.find(query, "id name imageUrl price -_id");
+  const mens = await Men.find(query, "id name imageUrl price -_id");
   return mens;
 };
 
 mensSchema.statics.getFullDocByQuery = async (query) => {
-  const mens = await Mens.find(query);
+  const mens = await Men.find(query);
   return mens;
 };
 
 mensSchema.statics.getById = async (id) => {
   console.log("getById called with id:", id);
-  const Mens = await Mens.findOne({ id: id });
-  if (!Mens) {
-    console.log("No Mens found with id:", id);
-    throw new Error("No Mens found with id");
+  const men = await Men.findOne({ id: id });
+  if (!men) {
+    console.log("No men found with id:", id);
+    throw new Error("No men found with id");
   }
-  return Mens;
+  return men;
 };
 
-const Mens = mongoose.model("Mens", mensSchema, "mens");
+const Men = mongoose.model("Men", mensSchema, "mens");
 
-module.exports = Mens;
+module.exports = Men;

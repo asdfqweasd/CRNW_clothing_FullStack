@@ -11,7 +11,7 @@ exports.userRegister = async (req, res) => {
     //get the eamil and password
     const { email, password } = req.body;
     //check if the request data is valid
-    if (email === "" || password === "") {
+    if (!email || !password) {
       return res.json({ msg: "InvalidData" });
     }
     // check if the user is existed
@@ -24,7 +24,7 @@ exports.userRegister = async (req, res) => {
     const token = generateToken(newUser);
     res.status(201).json({ msg: "userAdded", email, token });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -44,7 +44,7 @@ exports.userLogin = async (req, res) => {
     const token = generateToken(user);
     res.status(200).json({ msg: "loggedIn", token, email });
   } catch (error) {
-    console.error(err);
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
