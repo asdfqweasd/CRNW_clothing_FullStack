@@ -5,6 +5,7 @@ require("dotenv").config();
 const indexRouter = require("./routes/index");
 const productsRouter = require("./routes/productsRoute");
 const usersRouter = require("./routes/usersRoute");
+const paymentRoutes = require("./routes/paymentRoute");
 const app = express();
 
 // resolve request body into JSON, and define verify middleware for keeping raw request body for Stripe event construction
@@ -34,6 +35,7 @@ mongoose
 app.use("/", indexRouter);
 app.use("/products", productsRouter);
 app.use("/users", usersRouter);
+app.use("/payment", paymentRoutes);
 
 // Start the server
 app.listen(process.env.PORT, () =>

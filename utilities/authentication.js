@@ -3,9 +3,8 @@ const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 
 const generateToken = (user) => {
-  console.log(process.env.JWT_SECRET);
   return jwt.sign({ id: user.email }, process.env.JWT_SECRET, {
-    expiresIn: "12h",
+    expiresIn: "2d",
   });
 };
 
