@@ -24,3 +24,24 @@ exports.getById = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
+exports.getAll = async (req, res) => {
+  try {
+    let allProducts = [];
+    for (const model in models) {
+      console.log(`Loading products for model: ${model}`);
+      const products = await models[model].getByQuery({});
+      console.log(`Loaded ${products.length} products for model: ${model}`);
+      const category = {
+        title: model,
+        items: products,
+      };
+      allProducts.push(category);
+    }
+    console.log(`Loaded total of ${allProducts.length} products`);
+    res.json(allProducts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
